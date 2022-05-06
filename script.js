@@ -1,3 +1,4 @@
+// allows access to elements //
 const conatainer2 = document.getElementsByClassName("container2")[0];
 const conatainer3 = document.getElementsByClassName("container3")[0];
 const checkIcon = document.getElementById("check-icon");
@@ -11,6 +12,7 @@ checkIcon.addEventListener("click", function(){
     createNote();
 })
 
+// displays the note to type new notes when "create note" btn is clicked //
 function typeNote(){
     if(conatainer3.style.display == "none"){
         conatainer3.style.display = "block";
@@ -21,22 +23,28 @@ function typeNote(){
 }
 
 function createNote(){
+    // creates variables and allows access to id note-text //
     let noteText = document.getElementById("note-text").value;
     let node0 = document.createElement("div");
     let node1 = document.createElement("h1");
 
     node1.innerText = noteText;
 
+    // css to make node1 look like a square sticky note //
     node1.setAttribute("style", "width:250px; height:250px; font-size:26px; padding:25px; margin-top:10px; overflow:hidden; box-shadow:0px 10px 24px 0px rgba(0, 0, 0, 0.75)");
 
+    // calls random functions to generate different looking notes //
     node1.style.margin = margin();
     node1.style.transform = rotate();
     node1.style.background = color();
 
+    // adds noteText to div element(node0) //
     node0.appendChild(node1);
 
+    // inserts the node0 into container2.. at the end so they stack //
     conatainer2.insertAdjacentElement("beforeend", node0);
 
+    // enlarges, returns to normal scale, removes - notes //
     node0.addEventListener("mouseenter", function(){
         node0.style.transform = "scale(1.1";
     })
@@ -49,6 +57,7 @@ function createNote(){
         node0.remove();
     })
     
+    // clears the writing note once a note is added //
     document.getElementById("note-text").value = '';
 }
 
